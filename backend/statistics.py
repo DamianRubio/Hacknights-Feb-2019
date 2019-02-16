@@ -1,5 +1,7 @@
 from re import compile
 from emoji import UNICODE_EMOJI
+from stop_words import get_stop_words
+
 
 class StatsComputation:
 
@@ -36,7 +38,7 @@ class StatsComputation:
             self.emoji_count[message['user']] = len(emojis_in_message)
 
         # used_words
-        for word in msg_words:
+        for word in [filtered_word for filtered_word in msg_words if filtered_word not in get_stop_words('es')]:
             if word in self.used_words.keys():
                 self.used_words[word] += 1
             else:
@@ -58,7 +60,7 @@ class StatsComputation:
     def get_statistics(self):
         ordered_words = sorted(self.used_words, key=self.used_words.get, reverse=True)
         ordered_emojis = sorted(self.used_emojis, key=self.used_emojis.get, reverse=True)
-        
+
         return {
             'msg_count': self.msg_count,
             'word_count': self.word_count,
