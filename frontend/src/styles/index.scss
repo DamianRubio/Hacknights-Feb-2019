@@ -3,6 +3,23 @@
   float: none;
 }
 
+html, body{
+  height: 100%;
+  overflow: hidden;
+}
+
+.h100{
+  height: 100%;
+}
+
+.w100{
+  width: 100%;
+}
+
+#statistics-container{
+  overflow-y: auto;
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
