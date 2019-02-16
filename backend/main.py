@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from io import BytesIO
 from parser import parse_file
 from json import dumps
+from statistics import StatsComputation
 
 
 app = Flask(__name__)
@@ -20,10 +21,9 @@ def result():
     file = request.files['file']
 
     if file and allowed_file(file.filename):
+        stats_computation = StatsComputation()
         for message in parse_file(BytesIO(file.read())):
-            print(message)
-        return dumps(
-            {}
-        )
+            stats_computation.aggregate_message(message)
+        return dumps(stats_computation.get_statistics())
     else:
         return abort(400)

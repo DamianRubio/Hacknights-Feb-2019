@@ -1,11 +1,11 @@
 from re import match, findall
+from datetime import datetime
 
 
 def parse_message(message):
-    print(message)
     timestamp, user, message = findall(r'(\d+/\d+/\d+ \d+:\d+) - (.*?): ([\w\W]*)', message)[0]
     return {
-        'timestamp': timestamp,
+        'timestamp': datetime.strptime(timestamp, '%d/%m/%y %H:%M'),
         'user': user,
         'message': message
     }
