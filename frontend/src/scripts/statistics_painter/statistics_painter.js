@@ -1,5 +1,5 @@
-import MessageCountPainter from './message_count_painter';
-
+import MessageCountPainter from './pie_chart/message_count_painter';
+import WordCountPainter from './pie_chart/word_count_painter';
 
 export default class StatisticsPainter {
 
@@ -7,11 +7,13 @@ export default class StatisticsPainter {
 		this.container = document.getElementById(container_id);
 
 		this.painters = [
-			new MessageCountPainter(this.container)
+			new MessageCountPainter(this.container),
+			new WordCountPainter(this.container),
 		];
 	}
 
 	update(content) {
+		this.container.innerHTML = '';
 		this.painters.forEach(p => p.paint(content));
 	}
 }
