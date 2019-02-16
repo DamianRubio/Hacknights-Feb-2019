@@ -43,14 +43,10 @@ class StatsComputation:
                 self.used_words[word] = 1
 
         # used_emojis and emoji_count
-        if emojis_in_message:
-            print(emojis_in_message)
         for emoji in emojis_in_message:
             if emoji in self.used_emojis.keys():
-                print(f'found again emoji {emoji}')
                 self.used_emojis[emoji] += 1
             else:
-                print(f'new emoji {emoji}')
                 self.used_emojis[emoji] = 1
 
         # msg_per_hour and msg_per_week_day
