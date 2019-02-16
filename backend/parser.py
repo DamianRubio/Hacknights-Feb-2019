@@ -24,5 +24,5 @@ def parse_file(file):
             message = line.decode('utf-8')
         else:
             message += line.decode('utf-8')
-    
-    return message
+
+    yield parse_message(message)
