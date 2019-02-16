@@ -28,6 +28,7 @@ export default class Uploader {
 		formData.append('file', this.file_input.files[0]);
 
 		var request = new XMLHttpRequest();
+		request.open('post', 'http://localhost:5000/', true);
 		request.responseType = 'json';
 
 		request.onload  = () => this.notify_all(request.response);
