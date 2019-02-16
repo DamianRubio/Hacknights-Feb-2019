@@ -1,4 +1,4 @@
-from flask import Flask, flash, request, redirect, url_for, abort
+from flask import Flask, request, abort
 from io import BytesIO
 from parser import parse_file
 from json import dumps
@@ -21,7 +21,7 @@ def result():
 
     if file and allowed_file(file.filename):
         for message in parse_file(BytesIO(file.read())):
-            print(f'               {message}')
+            print(message)
         return dumps(
             {}
         )
