@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 flask = "*"
 emoji = "*"
+stop-words = "*"
 
 [dev-packages]
 ipdb = "*"

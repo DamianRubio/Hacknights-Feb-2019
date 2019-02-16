@@ -1,8 +1,10 @@
 from re import compile
 from emoji import UNICODE_EMOJI
+from stop_words import get_stop_words
+
+
 
 class StatsComputation:
-
     users = []
 
     msg_count = {}
@@ -20,7 +22,8 @@ class StatsComputation:
     }
 
     def aggregate_message(self, message):
-        msg_words = compile(r'[ |\s]*').split(message['message'])
+        msg_words = [word for word in compile(r'[ |\s]*').split(message['message']) if
+                     word not in ['', '<Multimedia', 'omitido>']]
         emojis_in_message = ''.join(ch for ch in message['message'] if ch in UNICODE_EMOJI)
 
         # msg_count and word_count
@@ -36,7 +39,7 @@ class StatsComputation:
             self.emoji_count[message['user']] = len(emojis_in_message)
 
         # used_words
-        for word in msg_words:
+        for word in [filtered_word for filtered_word in msg_words if filtered_word not in get_stop_words('es')]:
             if word in self.used_words.keys():
                 self.used_words[word] += 1
             else:
@@ -53,11 +56,10 @@ class StatsComputation:
         self.msg_per_hour[message['timestamp'].hour] += 1
         self.msg_per_week_day[message['timestamp'].weekday()] += 1
 
-
-
     def get_statistics(self):
         ordered_words = sorted(self.used_words, key=self.used_words.get, reverse=True)
         ordered_emojis = sorted(self.used_emojis, key=self.used_emojis.get, reverse=True)
+
         return {
             'msg_count': self.msg_count,
             'word_count': self.word_count,
