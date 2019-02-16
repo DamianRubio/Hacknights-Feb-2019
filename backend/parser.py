@@ -8,16 +8,11 @@ def parse_message(message):
 def is_new_message(line):
     return match(r'(\d+/\d+/\d+) (\d+:\d+) - ', line)
 
-
 def parse_file(file):
     message = ''
-    while True:
-        line = file.readline()
-        print(line)
-        if not line or is_new_message(line):
+    for line in file:
+        if is_new_message(line.decode('utf-8')):
             yield parse_message(message)
-            message = ''
+            message = line.decode('utf-8')
         else:
-            message += line
-
-    return message
+            message += line.decode('utf-8')
