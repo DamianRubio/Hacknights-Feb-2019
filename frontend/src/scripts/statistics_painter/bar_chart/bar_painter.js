@@ -1,14 +1,14 @@
 import Painter from '../painter.js';
 import Highcharts from 'highcharts';
 
-export default class PiePainter extends Painter {
+export default class BarPainter extends Painter {
 	constructor(container) {
 		super(container);
 	}
 
 	paint(content) {
 		var card = super.paint();
-		card.classList.add('col-md-6');
+		card.classList.add('col-md-12');
 		this.paintChart(card, content);
 	}
 
@@ -19,30 +19,25 @@ export default class PiePainter extends Painter {
 				enabled: false
 			},
 			chart: {
-				plotBackgroundColor: null,
-				plotBorderWidth: null,
-				plotShadow: false,
-				type: 'pie'
+				type: 'line'
 			},
 			title: {
 				text: this.title
 			},
-			tooltip: {
-				pointFormat: '{point.y}'
+			xAxis: {
+				categories: this.categories
 			},
 			plotOptions: {
-				pie: {
-					allowPointSelect: true,
-					cursor: 'pointer',
+				line: {
 					dataLabels: {
-						enabled: false
+						enabled: true
 					},
-					showInLegend: true
+					enableMouseTracking: false
 				}
 			},
-			series: [{
-				data: this.compute_info(content)
-			}]
+			series: [
+				this.compute_info(content)
+			]
 		});
 	}
 

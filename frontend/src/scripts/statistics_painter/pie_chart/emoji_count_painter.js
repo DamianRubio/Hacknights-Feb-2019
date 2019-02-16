@@ -1,16 +1,15 @@
 import PiePainter from './pie_painter.js';
 
-export default class WordCountPainter extends PiePainter {
+export default class EmojiCountPainter extends PiePainter {
 
 	constructor(container) {
 		super(container);
-		this.title = 'Word Count';
+		this.title = 'Emoji Count';
 	}
-
 
 	compute_info(content){
 		return Object.entries(
-			content.word_count
+			content.emoji_count
 		).map(e => {
 			return {
 				'name': e[0],
