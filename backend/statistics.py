@@ -3,8 +3,8 @@ from emoji import UNICODE_EMOJI
 from stop_words import get_stop_words
 
 
-class StatsComputation:
 
+class StatsComputation:
     users = []
 
     msg_count = {}
@@ -22,7 +22,8 @@ class StatsComputation:
     }
 
     def aggregate_message(self, message):
-        msg_words = [word for word in compile(r'[ |\s]*').split(message['message']) if word != ""] 
+        msg_words = [word for word in compile(r'[ |\s]*').split(message['message']) if
+                     word not in ['', '<Multimedia', 'omitido>']]
         emojis_in_message = ''.join(ch for ch in message['message'] if ch in UNICODE_EMOJI)
 
         # msg_count and word_count
@@ -54,8 +55,6 @@ class StatsComputation:
         # msg_per_hour and msg_per_week_day
         self.msg_per_hour[message['timestamp'].hour] += 1
         self.msg_per_week_day[message['timestamp'].weekday()] += 1
-
-
 
     def get_statistics(self):
         ordered_words = sorted(self.used_words, key=self.used_words.get, reverse=True)
