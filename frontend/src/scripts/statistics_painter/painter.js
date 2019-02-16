@@ -13,6 +13,7 @@ export default class Painter {
 		let card = document.createElement('div');
 		card.classList.add('card');
 		card.classList.add('float-left');
+		card.classList.add('my-1');
 		this.container.appendChild(card);
 		return card;
 	}

@@ -8,30 +8,25 @@
 
 <body>
 
-  <div class="col-md-6 center-block">
-    <div class="row">
-      <div class="col-md-2">
-        <form action="/upload" id="uploader-form">
+  <div class="col-md-6 center-block h100">
+    <div class="row h100">
+      <div class="col-md-2 aside">
+        <form action="http://localhost:5000/" id="uploader-form" method="POST" enctype="multipart/form-data">
           <span class="btn btn-primary btn-file">
             Upload
-            <input type="file" accept=".txt" />
+            <input name="file" type="file" accept=".txt" />
           </span>
         </form>
       </div>
 
-      <div class="col-md-10" id="statistics-container">
+      <div class="col-md-10 h100" id="statistics-container">
 
-        <div class="row">
-
-          <div class="card col-md-12" style="width: 18rem;">
-            <img src="https://i.ytimg.com/vi/yZEZhT_6ftQ/hqdefault.jpg" style="height: auto;" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Load a chat</h5>
-              <p class="card-text">Upload a Chat Siiii</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+        <div class="card col-md-12" style="width: 18rem;">
+          <img src="https://i.ytimg.com/vi/yZEZhT_6ftQ/hqdefault.jpg" style="height: auto;" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Load a chat</h5>
+            <p class="card-text">Upload a Chat Siiii</p>
           </div>
-
         </div>
 
       </div>
