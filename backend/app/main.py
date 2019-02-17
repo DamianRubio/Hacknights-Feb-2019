@@ -1,9 +1,10 @@
-from flask import Flask, request, abort
 from io import BytesIO
-from parser import parse_file
 from json import dumps
-from statistics import StatsComputation
 
+from flask import Flask, abort, request
+
+from parser import parse_file
+from statistics import StatsComputation
 
 app = Flask(__name__)
 
@@ -32,3 +33,6 @@ def result():
         return dumps(stats_computation.get_statistics())
     else:
         return abort(400)
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
